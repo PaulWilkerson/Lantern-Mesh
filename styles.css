@@ -78,6 +78,13 @@ a {
   text-decoration: none;
 }
 
+nav,
+.site-footer > span:last-child {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+
 .header-link:hover,
 .text-link:hover {
   color: var(--coral);
