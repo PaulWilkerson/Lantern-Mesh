@@ -17,78 +17,181 @@
       <a class="header-link" href="child-safety.html">Child safety</a>
     </nav>
   </header>
-
   <main class="page-shell policy-page">
     <p class="eyebrow">Lantern · app.lantern</p>
     <h1>Privacy policy</h1>
-    <p class="updated"><strong>Effective 3 September 2026</strong><br>Last updated 3 September 2026</p>
+    <p class="updated"><strong>Effective 6 September 2026</strong><br>Last updated 6 September 2026<br>Describes app version <strong>1.79</strong> (versionCode 86) and later unless replaced.</p>
     <article class="policy-content">
-      <p class="policy-lead">This policy is for the Android app <strong>Lantern</strong>, published as <strong>app.lantern</strong>. It is not the policy for lantern.io, GetLantern, or “Lantern: Fast &amp; Private VPN” (org.getlantern.lantern).</p>
+      <p class="policy-lead">This policy is only for the Android app <strong>Lantern</strong> published as <strong>app.lantern</strong>. It is <strong>not</strong> the policy for lantern.io, GetLantern, or “Lantern: Fast & Private VPN” (<code>org.getlantern.lantern</code>).</p>
 
       <h2>1. Who we are</h2>
-      <p>Lantern is a device-local reader and peer mesh. You capture pages and keep files on your phone, then optionally share offered copies with nearby phones over Bluetooth and local Wi-Fi. The developer does not operate an account system or a content server for the app.</p>
-      <p>For privacy questions, use the support email shown on this app’s Google Play store listing. That listing is the official contact point for app.lantern.</p>
+      <p>Lantern is a device-local offline library, nearby mesh, and optional USB LoRa accessory app. Pages, files, chat, maps, and controls live on your phone. The developer does not operate an account system or a content server for this app.</p>
+      <p>Contact: <a href="mailto:lantern.mesh@gmail.com">lantern.mesh@gmail.com</a> (also the address on the Google Play listing for <code>app.lantern</code>).</p>
 
       <h2>2. Short version</h2>
       <ul>
-        <li>No Lantern account. No sign-in.</li>
-        <li>Library pages, captured articles, and files stay on your phone unless you offer them on the mesh.</li>
-        <li>We do not run a backend that receives your library, files, location, or browsing history.</li>
-        <li>Capture fetches a URL you type. That request goes to the site, not to us.</li>
-        <li>Mesh uses Google Play services Nearby Connections on a channel you choose. Nearby radios can be observed.</li>
-        <li>Mesh sharing is sold as a Google Play subscription. Google processes the purchase.</li>
-        <li>Location permission is used to discover nearby devices. The app does not read, store, or upload GPS coordinates.</li>
+        <li>No Lantern account. No sign-in with us.</li>
+        <li>Library, files, chat, maps, and home controls stay on the phone unless you offer them on mesh or send them on LoRa.</li>
+        <li>We do not run a backend that receives your library, messages, files, or location.</li>
+        <li>Location is read <em>on the device</em> for mesh discovery, map pins, and locking LoRa to the legal band for where GPS says you are. Coordinates are not uploaded to us.</li>
+        <li>The SIM / network country code is read on the device to check LoRa rules. It is not uploaded to us.</li>
+        <li>Capture, weather, satellite scan, and optional AI keys talk to third parties you choose — not to a Lantern server.</li>
+        <li>Google Play processes the optional yearly privacy plan. Home automation is included and is not a purchase in current builds.</li>
+        <li>Paid Bluetooth hops can use AES-256-GCM. LoRa is ordinary radio (compact plaintext).</li>
       </ul>
 
-      <h2>3. Information the app stores on your device</h2>
-      <p>The following stays in app storage on the phone (SQLite, files, and preferences) unless you delete it or uninstall the app.</p>
-      <div class="table-wrap"><table><thead><tr><th>Data</th><th>What it is</th><th>Why</th></tr></thead><tbody>
-        <tr><td>Captured pages</td><td>URL, title, site, excerpt, stored HTML/text, size, time, whether it is offered</td><td>Offline reading</td></tr>
-        <tr><td>Field pack pages</td><td>Bundled reference articles shipped in the app</td><td>Offline reading without a network</td></tr>
-        <tr><td>Files (“drops”)</td><td>Name, type, size, copy of the file, whether it is offered, optional sender id</td><td>Keep and open files; optional mesh share</td></tr>
-        <tr><td>Callsign and channel</td><td>A display name and shared mesh word (default “circle” until changed)</td><td>Find the right nearby phones</td></tr>
-        <tr><td>Mesh settings</td><td>Whether radios are on and whether new captures are offered</td><td>Remember your choices</td></tr>
-        <tr><td>Play entitlement cache</td><td>Timestamp that a current mesh subscription was last seen</td><td>Allow mesh for up to 35 days without a live Play check</td></tr>
-      </tbody></table></div>
-      <p>Android backup, if enabled on the device, may include app files and preferences. The app does not transmit that backup to the developer.</p>
+      <h2>3. Information stored on your device</h2>
+      <p>Kept in app storage (SQLite, files, SharedPreferences) until you delete it, burn, or uninstall.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Data</th><th>What it is</th><th>Why</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Captured pages</td><td>URL, title, site, excerpt, stored HTML/text, size, time, offer flag</td><td>Offline reading</td></tr>
+            <tr><td>Field pack</td><td>Bundled reference articles shipped in the APK</td><td>Offline reading with no network</td></tr>
+            <tr><td>Files (“drops”)</td><td>Name, type, size, bytes, offer flag, optional sender, optional password lock metadata</td><td>Keep, open, and optionally share files</td></tr>
+            <tr><td>Callsign and channel</td><td>Display name and shared mesh word (default <code>circle</code>)</td><td>Find the right nearby phones</td></tr>
+            <tr><td>Optional profile</td><td>Name, look, note — only broadcast while mesh is on and you opt in</td><td>Tell nearby people who you are in person</td></tr>
+            <tr><td>Friends</td><td>Callsigns you marked as friends</td><td>Direct message and map pins</td></tr>
+            <tr><td>Chat</td><td>Messages you send and receive, channel vs direct vs group</td><td>Mesh messaging</td></tr>
+            <tr><td>Maps</td><td>Cached map tiles, last GPS fix, custom legend keys, amenity pins, share-map flag</td><td>Offline map and friend location when you enable it</td></tr>
+            <tr><td>Home controls</td><td>Names, URLs, BLE payloads, and commands you typed</td><td>Local buttons you created</td></tr>
+            <tr><td>LoRa settings</td><td>Locked country ISO from GPS, attestation, waiver, prefer-LoRa, USB radio state</td><td>Stay on an unlicensed band for the country you are in</td></tr>
+            <tr><td>SIM / network ISO</td><td>Two-letter country from the telephony API, read when you use LoRa</td><td>Cross-check GPS country; not a phone number</td></tr>
+            <tr><td>Weather file</td><td>A text forecast written to Files at most once per 12 hours if you toggle it</td><td>Offline forecast when a network appears</td></tr>
+            <tr><td>Ask / Field AI keys</td><td>API tokens you paste (xAI, OpenAI, Groq, Anthropic, Gemini, or compatible)</td><td>Live answers when you turn that on. Keys never leave the phone except to the provider you chose</td></tr>
+            <tr><td>Statistics</td><td>Local counts of messages/files and last-seen callsigns; previous callsigns after Burn</td><td>On-device Statistics screen. See §9 for what Burn does <em>not</em> erase</td></tr>
+            <tr><td>Play entitlement cache</td><td>Timestamps that <code>mesh_lock_yearly</code> was last seen as active (~13 months)</td><td>Keep Bluetooth encryption and share-passwords working in a blackout</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Android backup (if enabled) may copy app files and preferences to your Google account. The developer does not receive that backup.</p>
 
       <h2>4. Information we do not collect</h2>
-      <ul><li>Name, email, phone number, or government ID</li><li>Precise or approximate location coordinates</li><li>Address book, photos (except files you explicitly import), or SMS</li><li>Advertising IDs or analytics events</li><li>A browsing history, other than URLs you choose to capture, stored locally</li><li>Payment card details; Google Play handles payment</li></ul>
-      <p>There is no crash-reporting SDK, advertising SDK, or developer analytics SDK in the production app.</p>
+      <p>The developer does not collect, and the app does not send to a Lantern server:</p>
+      <ul>
+        <li>Name, email, or phone number as an account (we only see email if you write to us)</li>
+        <li>Payment card details (Google Play handles payment)</li>
+        <li>Address book or SMS</li>
+        <li>Advertising IDs</li>
+        <li>Analytics or crash-reporting SDKs in the production app</li>
+        <li>A browsing history other than URLs you choose to capture, stored locally</li>
+      </ul>
+      <p>Location, SIM country, chat, files, and keys stay on the device or go peer-to-peer / to a site or API you invoked. They are not a developer database.</p>
 
-      <h2>5. Network activity (what leaves the phone)</h2>
-      <h3>Capture</h3><p>When you save a page, the app requests that URL over the internet (HTTPS when the site supports it). The destination site, your ISP, and anyone on that path can see that a device fetched the page. The request uses a generic Android browser user-agent plus “Lantern”. Tracking query parameters are stripped from the stored URL when recognized. Images and scripts from the live site are not kept. Captured pages are stored as text/HTML on device.</p>
-      <p>Tapping a link in the reader opens it in your system browser. That browser has its own policy.</p>
-      <h3>Google Play Billing</h3><p>Mesh sharing requires the Play product <strong>mesh_monthly</strong>. Google processes the subscription, receipt, and fraud checks under <a href="https://policies.google.com/privacy">Google’s Privacy Policy</a>. The app only learns whether entitlement is active and stores a local timestamp.</p>
-      <h3>Google Play services — Nearby Connections</h3><p>If you tap Start on Mesh, the app advertises and discovers other Lantern phones on the same channel using Bluetooth, Wi-Fi, and Wi-Fi Direct through Google Play services. Nearby devices, not only Lantern users, may observe that a radio is advertising. Offered titles and files are sent only after a link is accepted, and only to that peer. You can compare a short PIN shown on both phones before trusting a link.</p>
-      <p>Mesh is off until you start it. Library, capture, and reading work without mesh.</p>
+      <h2>5. Location and radio identifiers</h2>
+      <p>Lantern requests approximate and precise location. That is used on the device for:</p>
+      <ul>
+        <li><strong>Nearby Connections</strong> — Android requires location for Bluetooth / Wi-Fi peer discovery on many versions.</li>
+        <li><strong>Maps</strong> — your last fix for the map cursor and, if you enable it, a pin that mesh friends can see while your mesh is on.</li>
+        <li><strong>LoRa country lock</strong> — GPS (and a SIM/network country check) pick the unlicensed band. Mock locations are ignored. Without a recent GPS fix, LoRa will not transmit.</li>
+      </ul>
+      <p>Coordinates are stored locally as the last fix. They are not uploaded to the developer. If you turn on map sharing and mesh, nearby Lantern friends on your channel can see an approximate position. You can turn that off.</p>
+      <p>Deny location and mesh discovery, maps, and LoRa TX will not work. Capture and reading still work.</p>
+      <p>USB host permission is used only to talk to a LoRa board you plug in. The app does not inventory other USB devices for us.</p>
 
-      <h2>6. Location permission</h2>
-      <p>Android requires location permission for Bluetooth and Wi-Fi peer discovery on many versions. Lantern requests approximate and precise location only so Nearby Connections can find phones on your channel.</p>
-      <ul><li>The app does not read the GPS fix.</li><li>The app does not show a map of you.</li><li>The app does not send coordinates to the developer or a Lantern server.</li><li>Bluetooth scan and nearby Wi-Fi permissions are declared as not used for location.</li></ul>
-      <p>If you deny location or related nearby-device permissions, mesh discovery will fail. Capture and reading still work.</p>
+      <h2>6. What leaves the phone</h2>
+      <h3>Capture</h3>
+      <p>Saving a page requests that URL (HTTPS when the site supports it). The site, your ISP, and anyone on that path can see the fetch. The user-agent is a generic Android browser plus “Lantern”. Tracking query parameters are stripped from the stored URL when recognized. Tapping a live link opens your system browser.</p>
+      <h3>Weather</h3>
+      <p>If you enable weather in Settings, the app may request a forecast from a public weather endpoint when a network is up, at most once per 12 hours, and save a <code>.txt</code> file in Files. A local notification tells you it arrived.</p>
+      <h3>Satellite kit scan</h3>
+      <p>Optional Wi-Fi scan looks at nearby SSID names for common satellite-kit patterns. SSIDs stay on the device. Associating with a kit is your network, not ours.</p>
+      <h3>Ask / Field AI</h3>
+      <p>If you paste a provider API key and enable live Ask, your question is sent to that provider under their privacy policy. Offline Ask uses a bundled corpus and does not leave the phone. We never receive your keys.</p>
+      <h3>Google Play Billing</h3>
+      <p>Optional product <code>mesh_lock_yearly</code> ($12 / year): AES-256-GCM on Bluetooth mesh hops and optional share-password lock. Google processes the purchase under <a href="https://policies.google.com/privacy">Google’s Privacy Policy</a>. The app stores local entitlement timestamps (~13 months) so the plan still works without a live Play check. Home automation is included; current builds do not require <code>home_unlock</code>.</p>
+      <h3>Google Play services — Nearby Connections</h3>
+      <p>Start on Mesh advertises and discovers other Lantern phones on the same channel using Bluetooth, Wi-Fi, and Wi-Fi Direct. Nearby radios — not only Lantern users — may observe that a radio is advertising. Offered titles, files, chat, and optional profile/location go only over accepted links (and over LoRa if you connected a board — see below).</p>
+      <h3>USB LoRa</h3>
+      <p>If you connect a USB LoRa module, attest, and accept the radio disclaimer, compact mesh payloads (chat, hello, catalog, commands) are transmitted on the locked unlicensed band. That is broadcast radio. Anyone with a compatible receiver on that band can demodulate it. LoRa is <strong>not</strong> covered by the Play encryption plan. Files and full pages stay on Bluetooth.</p>
+      <h3>Home controls</h3>
+      <p>Buttons you create send HTTP or BLE payloads to addresses you typed (your LAN or a paired device). Those packets go to your equipment, not to us.</p>
 
       <h2>7. What other people can see</h2>
-      <div class="table-wrap"><table><thead><tr><th>Situation</th><th>Who can see it</th></tr></thead><tbody><tr><td>Page kept private (Offer off)</td><td>Only this phone</td></tr><tr><td>Page or file offered, mesh off</td><td>Still only this phone until you Start mesh</td></tr><tr><td>Offered item, mesh live, same channel</td><td>A linked Lantern phone on that channel can see the title and pull a copy</td></tr><tr><td>Default channel “circle”</td><td>Any nearby Lantern user on “circle” can attempt to link. Change the channel if that is not your circle.</td></tr><tr><td>Capture while online</td><td>The site you fetch, and the network path to it</td></tr><tr><td>Play subscription</td><td>Google, as your Play account holder</td></tr></tbody></table></div>
-      <p>Pulled pages arrive with Offer off on the receiving phone. Files you receive are kept on that phone. Anyone you share a channel with is a person you must trust with whatever you offered.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Situation</th><th>Who can see it</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Page or file, Offer off, mesh off</td><td>Only this phone</td></tr>
+            <tr><td>Offered item, mesh live, same channel</td><td>A linked Lantern phone can see the title and pull a copy</td></tr>
+            <tr><td>Chat on a channel</td><td>Phones on that channel that are linked (Bluetooth) or on the LoRa air</td></tr>
+            <tr><td>Direct / group chat</td><td>The people you addressed, plus anyone who can hear LoRa if it went over LoRa</td></tr>
+            <tr><td>Optional profile, mesh on</td><td>Nearby Lantern users on your channel</td></tr>
+            <tr><td>Map share on</td><td>Mesh friends can see an approximate pin</td></tr>
+            <tr><td>Default channel <code>circle</code></td><td>Any nearby Lantern user on <code>circle</code> can try to link. Change it.</td></tr>
+            <tr><td>Paid Bluetooth hop</td><td>Payload is AES-256-GCM between those two phones. Metadata that a radio is up can still be observed</td></tr>
+            <tr><td>LoRa hop</td><td>Treat as audible radio. Compact plaintext</td></tr>
+            <tr><td>Play subscription</td><td>Google, as your Play account holder</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Copies already pulled by someone else are theirs. We cannot erase a peer’s phone.</p>
 
-      <h2>8. Children</h2><p>Lantern is not directed at children under 13 (or the equivalent age of digital consent in your country). We do not knowingly collect personal information from children. If you believe a child has stored personal data in the app, uninstall it or use Burn on this device in Settings, and contact us via the Play listing.</p>
+      <h2>8. Children</h2>
+      <p>Lantern is not directed at children under 13 (or the digital-consent age in your country). Mesh chat, files, location, and radio are not a children’s product. We do not knowingly collect personal information from children. Child-safety reports: <a href="mailto:lantern.mesh@gmail.com">lantern.mesh@gmail.com</a> (do not email suspected CSAM as an attachment).</p>
 
-      <h2>9. Retention, deletion, and your controls</h2>
-      <ul><li><strong>Delete a page</strong> in the reader.</li><li><strong>Remove a file</strong> with a long-press in Files.</li><li><strong>Stop offering</strong> with Offer on a page, or long-press a file.</li><li><strong>Stop radios</strong> with Stop on Mesh.</li><li><strong>Burn on this device</strong> in Settings clears local identity, library data, and files on that phone. It does not erase copies already pulled by someone else.</li><li><strong>Uninstall</strong> removes remaining app storage on that phone.</li><li><strong>Cancel the subscription</strong> in Google Play. Mesh locks when entitlement lapses; a 35-day local cache may still allow mesh after a last successful Play check.</li></ul>
-      <p>We cannot remotely delete data from your phone or from a peer who already pulled a copy. There is no developer-side profile to access, export, or erase.</p>
+      <h2>9. Retention, Burn, and your controls</h2>
+      <ul>
+        <li><strong>Delete a page</strong> in the reader; <strong>remove a file</strong> in Files.</li>
+        <li><strong>Stop offering</strong> on a page or file.</li>
+        <li><strong>Stop radios</strong> with Stop on Mesh; disconnect LoRa in Settings.</li>
+        <li><strong>Turn off map share, profile share, weather, Ask live</strong> in Settings.</li>
+        <li><strong>Cancel</strong> <code>mesh_lock_yearly</code> in Google Play. Bluetooth encryption stops when the local cache lapses.</li>
+        <li><strong>Uninstall</strong> removes remaining app storage on that phone.</li>
+      </ul>
+      <h3>Burn on this device</h3>
+      <p>Settings → Burn clears library pages, files, chat, friends, profile, map pins, legend, home controls, LoRa attestation, and the current callsign, then assigns a new random callsign.</p>
+      <p>Burn does <strong>not</strong> currently erase:</p>
+      <ul>
+        <li>Previous callsigns (kept so the on-device Statistics screen can still list them)</li>
+        <li>Play entitlement timestamps (so a paid year is not lost)</li>
+        <li>Tutorial “already seen” flags</li>
+      </ul>
+      <p>Those leftovers stay on that phone only. They are not uploaded to us. If you need a full local wipe, uninstall the app after Burn. Copies already on other phones are unaffected.</p>
 
-      <h2>10. Security — honest limits</h2><p>Local storage is not encrypted beyond whatever Android provides for the app sandbox. Mesh traffic uses Google Nearby Connections; treat offered items as visible to a determined nearby observer and to anyone on your channel who links. Capture is an ordinary web request. Cached pages are a snapshot; they do not make you invisible on later live visits. Do not treat Lantern as a VPN, anonymity network, or warrant-proof archive.</p>
+      <h2>10. Security — honest limits</h2>
+      <p>Local storage uses the Android app sandbox; it is not extra at-rest encryption. Use a device lock screen. Paid Bluetooth mesh uses ECDH P-256 and AES-256-GCM per link. LoRa is not that. Capture is an ordinary web request. Cached pages do not hide later live visits. Optional share-passwords protect a payload only if both people know the phrase.</p>
+      <p>Do not treat Lantern as a VPN, Tor, Signal, Meshtastic, anonymity network, warrant-proof archive, or 911 replacement.</p>
 
-      <h2>11. Legal bases (EEA / UK / similar)</h2><ul><li><strong>Contract / requested service:</strong> storing pages and files you save; running mesh you start.</li><li><strong>Legitimate interests:</strong> local entitlement cache so a paid mesh user can still share in a blackout.</li><li><strong>Legal obligation:</strong> if a lawful request is ever made about the developer; note we hold no user library.</li></ul><p>Google Play is an independent controller for your Google account and payments. Nearby Connections runs in Google Play services on the device.</p>
+      <h2>11. Legal bases (EEA / UK / similar)</h2>
+      <p>Where those laws apply to processing that actually occurs on the device:</p>
+      <ul>
+        <li><strong>Contract / requested service</strong> — storing what you save; mesh, LoRa, maps, and controls you turn on.</li>
+        <li><strong>Legitimate interests</strong> — local entitlement cache; on-device statistics; GPS/SIM lock so the radio stays on a listed unlicensed band.</li>
+        <li><strong>Consent</strong> — optional profile, map share, weather, live Ask, LoRa attestation and waiver.</li>
+        <li><strong>Legal obligation</strong> — if a lawful request is made about the developer; we hold no user library.</li>
+      </ul>
+      <p>Google Play is an independent controller for your Google account and payments. Nearby Connections runs in Google Play services on the device. Weather, capture targets, and AI providers are independent controllers for the requests you send them.</p>
 
-      <h2>12. International processing</h2><p>The developer does not host user content. If you use Capture or Play, those third parties may process data in other countries under their own terms.</p>
-      <h2>13. Changes</h2><p>We will update this policy when the app’s data practices change and will change the date above. Material changes will be reflected in the Play listing privacy URL.</p>
-      <h2>14. Play Data safety summary</h2><ul><li><strong>Personal data:</strong> No developer collection. Data stays on device or is shared peer-to-peer when offered.</li><li><strong>Location:</strong> Not collected. Permission is used for device discovery only.</li><li><strong>Photos/files:</strong> Not collected by the developer.</li><li><strong>Web browsing history:</strong> Not collected by the developer.</li><li><strong>Ads:</strong> Not sold or used for ads.</li><li><strong>Third-party sharing:</strong> No developer data share. Google Play and capture destinations are services you contact.</li><li><strong>Developer-server encryption:</strong> Not applicable; there are no developer servers.</li><li><strong>Deletion:</strong> Available on-device through delete, burn, or uninstall.</li></ul>
-      <h2>15. Contact</h2><p>Developer contact: the email address published on the Google Play store listing for <strong>Lantern</strong> (app.lantern).</p><p><strong>Android application ID:</strong> app.lantern</p>
+      <h2>12. International processing</h2>
+      <p>The developer does not host user content. Capture, Play, weather, and optional AI providers may process data in other countries under their own terms.</p>
+
+      <h2>13. Changes</h2>
+      <p>We update this policy when data practices change and change the date above. Material changes are reflected at the Play listing privacy URL.</p>
+
+      <h2>14. Play Data safety summary</h2>
+      <p>Accurate answers for this build:</p>
+      <ul>
+        <li><strong>Collected by the developer?</strong> No. No developer server for library, chat, or location.</li>
+        <li><strong>Location?</strong> Yes, processed and stored <em>on device</em> (mesh, maps, LoRa lock). Not sent to us. May be shared peer-to-peer if you enable map share.</li>
+        <li><strong>Device or other IDs?</strong> Callsign and channel are local. Previous callsigns may remain after Burn (on device).</li>
+        <li><strong>Photos / files?</strong> Only what you import. Stay on device unless you offer them.</li>
+        <li><strong>Web history?</strong> Only URLs you capture, on device.</li>
+        <li><strong>Sold / ads?</strong> No.</li>
+        <li><strong>Shared by the developer with third parties?</strong> No. Google Play, sites you capture, weather, and AI keys are services you contact.</li>
+        <li><strong>Encrypted in transit to developer servers?</strong> Not applicable. Capture uses HTTPS when the site does. Paid Bluetooth mesh uses AES-256-GCM. LoRa is not encrypted.</li>
+        <li><strong>Deletion?</strong> On-device delete / Burn / uninstall. The developer has no copy. Burn does not remove leftover callsigns or Play timestamps until uninstall.</li>
+      </ul>
+
+      <h2>15. Contact</h2>
+      <p><a href="mailto:lantern.mesh@gmail.com">lantern.mesh@gmail.com</a></p>
+      <p><strong>Android application ID:</strong> <code>app.lantern</code></p>
     </article>
   </main>
-
   <footer class="site-footer">
     <span>© 2026 Lantern Mesh</span>
     <span>
